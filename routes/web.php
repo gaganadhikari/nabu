@@ -23,6 +23,11 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->group(function(){
-    Route::get('dashboard',[AdminController::class,'dashboard']);
+
+    Route::group(['middleware'=>['admin']],function(){
+        Route::get('dashboard',[AdminController::class,'dashboard']);
+        Route::get('logout',[AdminController::class,'logout']);
+    });
+
     Route::match(['get','post'],'/',[AdminController::class,'login']);
 });
