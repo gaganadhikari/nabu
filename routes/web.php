@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::prefix('admin')->group(function(){
         Route::get('dashboard',[AdminController::class,'dashboard']);
         Route::get('settings',[AdminController::class,'settings']);
         Route::get('logout',[AdminController::class,'logout']);
+        Route::post('check-current-pwd',[AdminController::class,'chkCurrentPassword']);
+        Route::match(['get','post'],'update-admin-details','AdminController@updateAdminDetails');
     });
 
     Route::match(['get','post'],'/',[AdminController::class,'login']);
